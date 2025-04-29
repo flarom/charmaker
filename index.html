@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charmaker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="char-card">
+    <div class="document flex-container">
+        <div>
+            <img src="https://placewaifu.com/image/400/700" alt="" id="char-img" class="char-image">
+        </div>
+        <div style="width: 100%;">
+            <label>Name</label><br>
+            <input id="name" type="text"><br>
+            <label>Race</label><br>
+            <input id="race" type="text" readonly><br>
+            <label>Class</label><br>
+            <input id="class" type="text" readonly><br>
+            <label>Special ability</label><br>
+            <input id="ability" type="text" readonly><br>
+            <label>Atributes:</label>
+            <table>
+                <tr><td>Strength</td>    <td><input id="strength" type="text" readonly></td>     <td>Intelligence</td>    <td><input id="intelligence" type="text" readonly></td></tr>
+                <tr><td>Dexterity</td>   <td><input id="dexterity" type="text" readonly></td>    <td>Wisdom</td>          <td><input id="wisdom" type="text" readonly></td></tr>
+                <tr><td>Constitution</td><td><input id="constitution" type="text" readonly></td> <td>Charisma</td>        <td><input id="charisma" type="text" readonly></td></tr>
+            </table>
+            <hr>
+            <div class="flex-container flex-right">
+                <button onclick="window.print();">Print</button>
+                <button onclick="generate()" class="primary">Generate</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="character.js"></script>
+    <script>
+        function generate(){
+            const nameField = document.getElementById('name');
+            const raceField = document.getElementById('race');
+            const classField = document.getElementById('class');
+            const abilityField = document.getElementById('ability');
+
+            const strengthField = document.getElementById('strength');
+            const dexterityField = document.getElementById('dexterity');
+            const constitutionField = document.getElementById('constitution');
+            const intelligenceField = document.getElementById('intelligence');
+            const wisdomField = document.getElementById('wisdom');
+            const charismaField = document.getElementById('charisma');
+
+            nameField.value = generateName(3);
+            raceField.value = generateRace();
+            classField.value = generateClass();
+            abilityField.value = generateAbility();
+
+            const atributes = generateAtributes();
+
+            strengthField.value = atributes.Strength;
+            dexterityField.value = atributes.Dexterity;
+            constitutionField.value = atributes.Constitution;
+            intelligenceField.value = atributes.Intelligence;
+            wisdomField.value = atributes.Wisdom;
+            charismaField.value = atributes.Charisma;
+
+            updateCharImg();
+        }
+
+        function updateCharImg(){
+            const charImg = document.getElementById('char-img');
+            const currentTime = new Date().getTime();
+
+            charImg.src = 'https://placewaifu.com/image/400/700?' + currentTime;
+        }
+
+        generate();
+    </script>
+</body>
+</html>
